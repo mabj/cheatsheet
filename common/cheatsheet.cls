@@ -14,6 +14,8 @@
 %------------------------------------------------------------------------------
 % Packages
 %------------------------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage[table]{xcolor}
 % Layout
 \RequirePackage{geometry}
 % Header and footer
@@ -38,6 +40,7 @@
 \definecolor{primary}{RGB}{54,57,63}
 \definecolor{background}{RGB}{250,252,253}
 \definecolor{border}{RGB}{214,213,218}
+\rowcolors{1}{darkgray!30}{lightgray!30}
 
 % Legacy color names for backward compatibility
 \colorlet{innoinnored}{primary}
