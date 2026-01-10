@@ -40,30 +40,28 @@
 \hline
 \end{tabularx}
 
-\cheatsheetsection{Data Visualization}
-
-Ut tellus elementum sagittis vitae et leo duis ut diam. Faucibus purus in
-massa tempor.
-
-Lectus nulla at volutpat diam:
-
-\begin{enumerate}
-  \item Quam viverra orci sagittis eu volutpat odio facilisis mauris sit.
-  \item In hac habitasse platea dictumst vestibulum rhoncus:\\
-    \texttt{est pellentesque --elit}
-\end{enumerate}
-
-\cheatsheetsection{Patching}
-
-Venenatis tellus in metus vulputate. Sit amet facilisis magna etiam tempor
-orci eu lobortis elementum:
-
-\begin{lstlisting}
-quam adipiscing
-quam vitae
-\end{lstlisting}
-
 \cheatsheetsection{Inspecting Memory}
+
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{db [addr]} & displays data as Bytes + ASCII (at address [addr]) \\
+\textbf{da [addr]} & displays data ASCII string until NULL is found \\
+\textbf{du [addr]} & displays data UNICODE string until NULL is found \\
+\hline
+\end{tabularx}
+
+\cheatsheetsection{Patching Memory}
+
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{eb [addr] [value]} & patches [addr] with single Byte \\
+\textbf{ed [addr] [value]} & patches [addr] with double word (32 bits) \\
+\textbf{eza [addr] [value]} & patches [addr] with ASCII string \\
+\textbf{ezu [addr] [value]} & patches [addr] with UNICODE string \\
+\hline
+\end{tabularx}
+
+\cheatsheetsection{Vieweing Memory Maps}
 
 Augue eget arcu dictum varius duis at consectetur lorem donec. Semper quis
 lectus nulla at volutpat diam ut venenatis tellus:
