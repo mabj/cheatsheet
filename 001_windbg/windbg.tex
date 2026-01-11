@@ -14,6 +14,7 @@
 \textbf{p (F10)} & Step Over \\
 \textbf{g (F5)} & Run \\
 \textbf{gu} & Execute until the current function is complete \\
+\textbf{gn} & Execute passing exceptions to debugged process \\
 \textbf{restart} & Stop and restart execution \\ 
 \hline
 \end{tabularx}
@@ -27,16 +28,16 @@
 \textbf{bc \#} & Clear breakpoint (takes wildcards) \\
 \textbf{bd \#} & Disable breakpoint (takes wildcards)\\
 \textbf{be \#} & Enable breakpoint (takes wildcards)\\ 
+\textbf{ba [a] [s] [addr]} & Hardware breakpoint where [a] is access (rwx) and [s] is size.\\ 
 \hline
 \end{tabularx}
-
-\cheatsheetsection{Inspecting Modules}
+\cheatsheetsection{Registers}
 
 \begin{tabularx}{\columnwidth}{  l  X  }
 \hline
-\textbf{lm} & Lists modules \\
-\textbf{lm o} & Lists only loaded modules \\
-\textbf{lm a [addr]} & Lists the module that contains the address [addr] \\
+\textbf{r} & Display all registers and their values \\
+\textbf{r [register]} & Displays information about a single register \\
+\textbf{r [register]=[value]} & Changes value of a register \\
 \hline
 \end{tabularx}
 
@@ -55,57 +56,135 @@
 \begin{tabularx}{\columnwidth}{  l  X  }
 \hline
 \textbf{eb [addr] [value]} & patches [addr] with single Byte \\
+\textbf{ew [addr] [value]} & patches [addr] with word (16 bits) \\
 \textbf{ed [addr] [value]} & patches [addr] with double word (32 bits) \\
 \textbf{eza [addr] [value]} & patches [addr] with ASCII string \\
 \textbf{ezu [addr] [value]} & patches [addr] with UNICODE string \\
 \hline
 \end{tabularx}
 
+\cheatsheetsection{Searching Memory}
+
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{s -[type] [range] [pattern]} & search to a specific type of pattern in a memory range. \\
+\textbf{s -a 0 100 "string"} & search ASCII string from address 0 until 100. \\
+\hline
+\end{tabularx}
+
 \cheatsheetsection{Vieweing Memory Maps}
 
-Augue eget arcu dictum varius duis at consectetur lorem donec. Semper quis
-lectus nulla at volutpat diam ut venenatis tellus:
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{!address} & Displays all memory maps and properties. \\
+\textbf{!address [addr]} & Checks if [addr] is part of a valid memory map. \\
+\textbf{!address -summary} & Displays general information about memory usage. \\
+\textbf{!address [filters]} & Shows only memory maps with specific properties (/f:Type=MEM\_PRIVATE and /f:Protect=PAGE\_EXECUTE\_READWRITE). \\
+\textbf{!vprot [addr]} & Displays information about protection. \\
 
-\begin{enumerate}
-  \item Nulla aliquet porttitor lacus luctus accumsan. Volutpat maecenas
-        volutpat blandit aliquam etiam erat velit scelerisque.
-  \item Elit sed vulputate mi sit amet mauris commodo.
-  \item Ac felis donec et odio pellentesque diam volutpat. Quam viverra orci
-        sagittis eu volutpat odio facilisis mauris sit.
-\end{enumerate}
+\hline
+\end{tabularx}
 
-\cheatsheetsection{Changing Architecture}
+\cheatsheetsection{Inspecting Modules}
 
- Tempus egestas sed sed risus pretium quam vulputate. Sed lectus vestibulum
- mattis ullamcorper. Quis ipsum suspendisse ultrices gravida.
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{lm} & Lists modules \\
+\textbf{lm o} & Lists only loaded modules \\
+\textbf{lm a [addr]} & Lists the module that contains the address [addr] \\
+\hline
+\end{tabularx}
 
-Volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in:
+\cheatsheetsection{Disassembler}
 
-\begin{enumerate}
-  \item Eget sit amet tellus cras adipiscing enim.
-  \item Eu scelerisque felis
-        \href{mailto://example@example.com}{example@example.com}
-\end{enumerate}
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{u [addr] \#} & Disassembly a number of instructions from a memory address \\
+\hline
+\end{tabularx}
 
-\cheatsheetsection{Visualizing Registers}
+\cheatsheetsection{Symbols}
 
-At ultrices mi tempus imperdiet nulla malesuada. Sit amet consectetur
-adipiscing elit pellentesque habitant. Phasellus vestibulum lorem sed risus
-ultricies tristique nulla aliquet.
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{ld *} & Downloads, caches and loads symbols of all loaded modules from configured source. \\
+\textbf{ld [module]} & Downloads, caches and loads symbols of a specific loaded module. \\
+\textbf{x module!symbol} & Display the symbols that match the specified pattern, can contain wildcard. \\
+\hline
+\end{tabularx}
 
-\begin{lstlisting}
-cras semper auctor
-\end{lstlisting}
+\cheatsheetsection{Data Types}
+
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{dt name addr} & Specify the address of the struct (e.g. ``dt ntdll!\_TEB @\$teb''). \\
+\textbf{dt -r name} & Recursively dump the subtype fields. \\
+\textbf{dt name field} & Specify the specific field to display. \\
+\hline
+\end{tabularx}
+
+\cheatsheetsection{Stack}
+
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{k} & Display basic call stack. \\
+\textbf{kp} & Display call stack with full parameters. \\
+\textbf{kb} & Display call stack with three first parameters. \\
+\textbf{!stack} & Summary of the current thread\'s stack usage. \\
+\hline
+\end{tabularx}
+
+\cheatsheetsection{Pseudo-Registers}
+
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{\$peb} & Address of the current process' Process Execution Block (e.g. ``\textit{dt \_PEB @\$peb}''). \\
+\textbf{\$ted} & Address of the current thread's Thread Execution Block. \\
+\textbf{\$exentry} & The address of the executable's entry point. \\
+\hline
+\end{tabularx}
+
+\cheatsheetsection{Help}
+
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{?} & Help on Debugee commands. \\
+\textbf{.help} & Help on Debugger commands. \\
+\hline
+\end{tabularx}
 
 \cheatsheetsection{MISC}
 
-Neque sodales ut etiam sit amet nisl purus. Ornare lectus sit amet est
-placerat in. Consectetur purus ut faucibus pulvinar elementum integer enim
-neque volutpat:
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{.writemem [file] [addr] L[size]} & Dumps L Bytes from address addr to file. \\
+\textbf{.effmach [arch]} & Switches architecture used by the engine (interesting to analyse WoW). \\
+\textbf{!exchain} & Display the current exception handler chain. \\
+\textbf{!teb} & Displays the Thread Environment Block. \\
+\textbf{!gle} & Shows the GetLastError code for the current thread. \\
+\textbf{!error [code]} & Decodes a specific hex error code (like $0x80070005$) into its Windows error name. \\
+\textbf{.printf [fmt] [prams]} & meta-command implementing C-like printf function. \\
+\textbf{.reload} & Forces the debugger to discard its current symbol information and reload it. \\
+\textbf{.cls} & Clears the command output screen. \\
+\textbf{.sympath [path]} & Sets where WinDbg looks for symbols (``\textit{.pdb}'' files). \\
+\textbf{.dvalloc} & Allocates memory using VirtualAllocEx.\\
+\textbf{f [range] [pattern]} & Fills a specified memory range with a repeating pattern (\textit{e.g.} ``\textit{f 0012ff40 L20 0}'').\\
+\textbf{m [range] [addr]} & Moves memory from one address to another. (\textit{e.g.} ``\textit{m 0012ff40 L20 0012ff80}'').\\
+\hline
+\end{tabularx}
 
-\begin{lstlisting}
-amet porttitor eget dolor
-\end{lstlisting}
+
+\cheatsheetsection{UI Shortcuts}
+
+\begin{tabularx}{\columnwidth}{  l  X  }
+\hline
+\textbf{ENTER} & Repeats last command. \\
+\textbf{ALT + 1} & Command window. \\
+\textbf{ALT + 7} & Disassembly window. \\
+\textbf{Alt + Shift + T} & Opens the Threads window. \\
+\hline
+\end{tabularx}
+
 
 \end{multicols*}
 
